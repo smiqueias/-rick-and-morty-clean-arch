@@ -6,6 +6,7 @@ import 'package:rm_clean_arch_graphql/src/modules/character/data/repositories/ch
 import 'package:rm_clean_arch_graphql/src/modules/character/domain/repositories/character_repository.dart';
 import 'package:rm_clean_arch_graphql/src/modules/character/domain/usecases/get-characters/get_characters_use_case.dart';
 import 'package:rm_clean_arch_graphql/src/modules/character/domain/usecases/get-characters/get_characters_use_case_impl.dart';
+import 'package:rm_clean_arch_graphql/src/modules/character/presentation/screens/character/view-model/character_vm.dart';
 
 class Inject {
   static init() {
@@ -22,5 +23,8 @@ class Inject {
 
     // usecases
     getIt.registerLazySingleton<GetCharactersUseCase>(() => GetCharactersUseCaseImpl(getIt<CharacterRepository>()));
+
+    // viewmodels
+    getIt.registerFactory<CharacterVM>(() => CharacterVM(getIt<GetCharactersUseCase>()));
   }
 }
